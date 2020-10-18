@@ -6,12 +6,15 @@ packages:
 sources:
   - https://git.sr.ht/~tcarrio/forward-cloudfront-proto
   - https://git.sr.ht/~tcarrio/build-helpers
+  - https://git.sr.ht/~tcarrio/git-mirror
 environment:
   deploy_dir: .
   helpers_dir: build-helpers
   project_dir: forward-cloudfront-proto
+  GIT_TARGET_REPO: git@github.com:tcarrio/forward-cloudfront-proto.git
 secrets:
   - ba28a958-f5f1-48d5-830f-abcbb5efb1a5
+  - 4e983fc2-9d24-43eb-9986-1c18feb2e7b8
 tasks:
   - install: |
       cd $project_dir
@@ -42,3 +45,5 @@ tasks:
       fi
 
       npm publish --access public
+  - mirror: |
+      git-mirror/git-mirror.sh $project_dir
